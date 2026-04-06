@@ -34,12 +34,20 @@ export default function Navbar() {
           </span>
         </a>
 
-        <a
-          href="#waitlist"
-          className="text-[11px] font-heading font-medium tracking-[0.2em] uppercase bg-foreground text-white px-5 py-2.5 hover:bg-foreground/80 transition-colors duration-200"
-        >
-          Join Waitlist
-        </a>
+        <div className="flex items-center gap-6">
+          <a
+            href="/faq"
+            className="text-[11px] font-heading font-medium tracking-[0.2em] uppercase text-muted hover:text-foreground transition-colors duration-200"
+          >
+            FAQ
+          </a>
+          <a
+            href="#waitlist"
+            className="text-[11px] font-heading font-medium tracking-[0.2em] uppercase bg-foreground text-white px-5 py-2.5 hover:bg-foreground/80 transition-colors duration-200"
+          >
+            Join Waitlist
+          </a>
+        </div>
       </div>
     </nav>
   );

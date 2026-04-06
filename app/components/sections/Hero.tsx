@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { AuroraBackground } from "../ui/aurora-background";
+import { TextDisperse } from "../ui/text-disperse";
 
 export default function Hero() {
   return (
@@ -26,8 +27,10 @@ export default function Hero() {
         </div>
 
         {/* Syne Extra Bold — the hero statement */}
-        <h1 className="font-display text-[clamp(3rem,8vw,7rem)] font-extrabold tracking-tight leading-[0.95] text-foreground">
-          Meet COSMIC.
+        <h1 className="font-display font-extrabold tracking-tight leading-[0.95] text-foreground">
+          <TextDisperse className="text-[clamp(3rem,8vw,7rem)] justify-center">
+            Meet COSMIC.
+          </TextDisperse>
         </h1>
 
         {/* Space Grotesk — wide tracked sub-headline */}
