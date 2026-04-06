@@ -2,17 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { AuroraBackground } from "../ui/aurora-background";
 import { TextDisperse } from "../ui/text-disperse";
 
 export default function Hero() {
   return (
-    <AuroraBackground className="min-h-screen pt-16">
+    <section className="min-h-screen pt-16 flex flex-col items-center justify-center relative">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative flex flex-col items-center text-center px-6 z-10"
+        className="flex flex-col items-center text-center px-6"
       >
         {/* Logo character */}
         <div className="mb-12">
@@ -29,7 +28,7 @@ export default function Hero() {
         {/* Syne Extra Bold — the hero statement */}
         <h1 className="font-display font-extrabold tracking-tight leading-[0.95] text-foreground">
           <TextDisperse className="text-[clamp(3rem,8vw,7rem)] justify-center">
-            Meet COSMIC.
+            COSMIC.
           </TextDisperse>
         </h1>
 
@@ -59,14 +58,6 @@ export default function Hero() {
           </a>
         </div>
       </motion.div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="text-[9px] font-heading tracking-[0.4em] uppercase text-muted-light">
-          Scroll
-        </span>
-        <div className="w-px h-8 bg-gradient-to-b from-border-dark to-transparent" />
-      </div>
-    </AuroraBackground>
+    </section>
   );
 }

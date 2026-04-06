@@ -12,7 +12,7 @@ COSMIC is a landing page for an innovative beauty product: a single-use dissolva
 - **Styling:** Tailwind CSS v4 (config lives in `globals.css` via `@theme inline`, NOT in `tailwind.config.js`)
 - **Language:** TypeScript
 - **Backend:** API route (`/api/waitlist`) stores to local JSON. Convex files ready for upgrade (see below).
-- **Animations:** Framer Motion (hero entrance), CSS keyframes (marquee, fade-up, aurora)
+- **Animations:** Framer Motion (hero entrance, text disperse), CSS keyframes (fade-up), @paper-design/shaders-react (hero mesh gradient background, pulsing border)
 - **Utilities:** clsx + tailwind-merge (`lib/utils.ts` → `cn()` helper)
 - **Fonts:** Syne (display/headings), Space Grotesk (sub-headers/labels), Inter (body)
 - **Deployment target:** Vercel
@@ -24,26 +24,29 @@ cosmic/
 ├── app/
 │   ├── globals.css                 # Tailwind v4 theme, animations, grain texture
 │   ├── layout.tsx                  # Root layout — fonts, metadata
-│   ├── page.tsx                    # Main landing page — assembles all sections + marquees
+│   ├── page.tsx                    # Home page — assembles all sections (no FAQ, no marquees)
 │   ├── ConvexClientProvider.tsx     # Convex provider (not used by default — see Convex section)
+│   ├── faq/
+│   │   └── page.tsx                # FAQ page — standalone page with Navbar, FAQ section, Footer
 │   ├── api/
 │   │   └── waitlist/route.ts       # POST endpoint — stores emails to waitlist-emails.json
 │   └── components/
 │       ├── ui/
-│       │   ├── aurora-background.tsx   # Subtle aurora gradient (hero background)
+│       │   ├── shader-background.tsx  # MeshGradient + PulsingBorder hero background (@paper-design/shaders-react)
+│       │   ├── text-disperse.tsx       # Hover-to-disperse letter animation (hero title)
 │       │   ├── FadeInSection.tsx        # Scroll-triggered fade-in wrapper
-│       │   ├── Marquee.tsx             # Infinite scrolling text band divider
+│       │   ├── Marquee.tsx             # Infinite scrolling text band divider (available, not used on home)
 │       │   └── SectionHeading.tsx      # Reusable section heading
 │       └── sections/
-│           ├── Navbar.tsx          # Fixed navbar, white bg, always-visible text
-│           ├── Hero.tsx            # Aurora bg, logo, headline, CTA (uses framer-motion)
+│           ├── Navbar.tsx          # Fixed navbar — logo, FAQ link, Join Waitlist button
+│           ├── Hero.tsx            # Shader bg, logo, TextDisperse headline, CTA
 │           ├── Problem.tsx         # Pain point stats with editorial typography
 │           ├── Solution.tsx        # Split layout — logo + product description
 │           ├── HowItWorks.tsx      # 3-step horizontal row layout
 │           ├── Features.tsx        # 2-column numbered feature list
 │           ├── Visual.tsx          # Product system cards (mask/spray/app) with placeholders
 │           ├── Waitlist.tsx        # Email capture form (uses /api/waitlist)
-│           ├── FAQ.tsx             # Numbered accordion
+│           ├── FAQ.tsx             # Numbered accordion (used on /faq page)
 │           └── Footer.tsx          # Minimal footer with logo
 ├── convex/                         # Ready for Convex upgrade (not active by default)
 │   ├── schema.ts                   # Waitlist table schema
@@ -56,10 +59,17 @@ cosmic/
 └── AGENTS.md                       # Next.js 16 doc-reading rule
 ```
 
+## Pages
+
+| Route | File | Description |
+|-------|------|-------------|
+| `/` | `app/page.tsx` | Home — Hero, Problem, Solution, HowItWorks, Features, Visual, Waitlist |
+| `/faq` | `app/faq/page.tsx` | FAQ — standalone page with numbered accordion |
+
 ## Design System
 
 ### Philosophy
-Premium minimalist — inspired by Aesop (warm editorial storytelling), Byredo (luxury restraint), Linear (precision UI), The Ordinary (clinical clarity). White-dominant with intentional texture. Not plain — uses grain overlays, marquee dividers, oversized typography, numbered items, and gallery-style labels.
+Premium minimalist — inspired by Aesop (warm editorial storytelling), Byredo (luxury restraint), Linear (precision UI), The Ordinary (clinical clarity). White-dominant with intentional texture. Not plain — uses grain overlays, oversized typography, numbered items, and gallery-style labels.
 
 ### Color Palette
 | Token | Hex | Usage |
@@ -72,6 +82,14 @@ Premium minimalist — inspired by Aesop (warm editorial storytelling), Byredo (
 | `surface` | `#f8f8f8` | Alternating section backgrounds |
 | `accent` | `#c4a0d4` | Subtle lavender ("cosmic" touch, used sparingly) |
 
+### Hero Shader Background Colors
+| Original (demo) | Replaced with | Role |
+|-----------------|---------------|------|
+| Cyan `#06b6d4` | `#ffffff` | Light accent |
+| Black `#000000` | `#89b8ff` | Base blue |
+| Orange `#f97316` | `#ffd9fc` | Soft pink |
+| White `#ffffff` | `#010044` | Deep navy |
+
 ### Typography Hierarchy
 | Token | Font | Use |
 |-------|------|-----|
@@ -83,7 +101,6 @@ Premium minimalist — inspired by Aesop (warm editorial storytelling), Byredo (
 - **Section label:** `text-[11px] font-heading font-medium tracking-[0.3em] uppercase text-muted-light mb-8`
 - **Numbered items:** `font-heading text-[10px] tracking-[0.2em] text-muted-light` (01, 02...)
 - **Grain texture:** `relative grain` class on `bg-surface` sections
-- **Marquee dividers:** Between major content blocks for kinetic energy
 - **Gallery labels:** `text-[10px] font-heading tracking-[0.3em] uppercase text-muted-light` ("Fig. 01 — ...")
 
 ### Button Styles

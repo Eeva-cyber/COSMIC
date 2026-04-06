@@ -7,8 +7,8 @@ import Image from "next/image";
  */
 export default function Solution() {
   return (
-    <section className="py-28 md:py-36 px-6 bg-surface relative grain">
-      <div className="relative z-10 max-w-6xl mx-auto">
+    <section className="py-28 md:py-36 px-6">
+      <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Visual — product identity with label */}
           <FadeInSection>

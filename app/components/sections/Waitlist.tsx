@@ -49,8 +49,7 @@ export default function Waitlist() {
   }
 
   return (
-    <section id="waitlist" className="py-28 md:py-36 px-6 relative">
-      <div className="absolute inset-x-0 top-0 h-px bg-border" />
+    <section id="waitlist" className="py-28 md:py-36 px-6">
 
       <div className="max-w-lg mx-auto text-center">
         <FadeInSection>

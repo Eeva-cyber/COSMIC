@@ -39,8 +39,8 @@ const features = [
  */
 export default function Features() {
   return (
-    <section className="py-28 md:py-36 px-6 bg-surface relative grain">
-      <div className="relative z-10 max-w-6xl mx-auto">
+    <section className="py-28 md:py-36 px-6">
+      <div className="max-w-6xl mx-auto">
         <FadeInSection>
           <p className="text-[11px] font-heading font-medium tracking-[0.3em] uppercase text-muted-light mb-8">
             Why COSMIC
