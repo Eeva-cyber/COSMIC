@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude code
+.claude/
+
+# waitlist data
+waitlist-emails.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
